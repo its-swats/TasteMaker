@@ -23,5 +23,9 @@ accounts-password
 accounts-facebook
 http
 facebook
+
+chart:chart
+
 zurb:foundation-sites
+
 ewall:foundation
