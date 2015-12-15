@@ -227,6 +227,7 @@ var wineApiLookupSorting = function(results, wineName) {
 
   var similar = function(searchWord, resultObject){
     var highest = {score: 0}
+    results = []
     for (var name in resultObject){
       var lengthsearchWord = searchWord.length;
       var lengthResult = name.length - 5;
@@ -240,12 +241,15 @@ var wineApiLookupSorting = function(results, wineName) {
       }
       var weight = equivalency / maxLength;
       var alikeness = weight * 100
-      if (alikeness > highest.score){
-        highest.name = name
-        highest.score = alikeness
-      }
+
+
+
+      results.push({name: name, score: alikeness})
+
+
     }
-    console.log(highest);
-    return resultObject[highest.name]
+    var sorted = _.sortBy(results, 'score').reverse()
+    console.log(sorted)
+    return sorted[0]
     console.log('worked')
   }
