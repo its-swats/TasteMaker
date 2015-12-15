@@ -5,15 +5,11 @@ Template.notFound.events({
     "click #manualSearch": function(event) {
         event.preventDefault();
         var searchText = $('input').val();
+        alert('here')
          Meteor.call("wineApiLookup", searchText, function(err, res){
-            wineResults = wineApiLookupSorting(res, searchText)
-            Blaze.remove(render)
-            wineCoords = wineTasteCoordinates(wineResults.varietal, wineResults.style);
-            wineQuestions = questionServer(wineCoords)
-            wineResults['user_id'] = Meteor.userId()
-            wineResults['wineCoords'] = wineCoords
-            Meteor.call("addHistory", wineResults);
-            render = Blaze.renderWithData(Template.rateWine, {name: wineResults.name, style: wineResults.style}, document.querySelector('#pageDisplay'))
+            var results = [res, searchText]
+            alert('here')
+            showWineResults(results);
         })
     }
 })
@@ -24,23 +20,8 @@ Meteor.startup(function () {
       if (Meteor.isCordova){
         cordova.plugins.barcodeScanner.scan(
           function (result) {
-            console.log("heheheheheh")
-            console.log(result);
             Meteor.call('upcDecoder', result, function(error, results){
-              $('#pageHome').addClass('hide');
-              $('#pageDisplay').removeClass('hide');
-              wineResults = wineApiLookupSorting(results[0], results[1])
-              alert(wineResults.style)
-              alert(wineResults.varietal)
-              wineCoords = wineTasteCoordinates(wineResults.varietal, wineResults.style);
-              alert("here")
-              wineQuestions = questionServer(wineCoords)
-              wineResults['user_id'] = Meteor.userId()
-              wineResults['wineCoords'] = wineCoords
-              Meteor.call("addHistory", wineResults);
-              alert('stop 2')
-              render = Blaze.renderWithData(Template.rateWine, {name: wineResults.name, style: wineResults.style}, document.querySelector('#pageDisplay'))
-              alert('stop 3')
+               showWineResults(results);
             });
           },
           function (error) {
@@ -52,8 +33,23 @@ Meteor.startup(function () {
   })
 })
 
+function showWineResults(results){
+  if (!Meteor.isCordova){
+    Blaze.remove(render);
+  }
+  wineResults = wineApiLookupSorting(results[0], results[1])
+  wineCoords = wineTasteCoordinates(wineResults.varietal, wineResults.style);
+  wineQuestions = questionServer(wineCoords)
+  wineResults['user_id'] = Meteor.userId()
+  wineResults['wineCoords'] = wineCoords
+  Meteor.call("addHistory", wineResults);
+  render = Blaze.renderWithData(Template.rateWine, {name: wineResults.name, style: wineResults.style}, document.querySelector('#pageDisplay'))
+}
+
+
 
 function wineTasteCoordinates(varietal, wineStyle, callback) {
+
    // Should be DB Collection or we can create static list since none of these numbers change
   var varietalTaste = {
   //Reds
@@ -84,30 +80,27 @@ function wineTasteCoordinates(varietal, wineStyle, callback) {
   var varietalStyle = {
   //Reds
     'Big &amp; Bold':[0,5],
-    'Earthy &amp; Spicy':[5,3],
-    'Light &amp; Fruity':[-3,-3],
-    'Smooth &amp; Supple':[-4,2],
+    'Earthy_&_Spicy':[5,3],
+    'Light_&_Fruity':[-3,-3],
+    'Smooth_&_Supple':[-4,2],
   //Whites
-    'Fruity &amp; Smooth':[-5,2],
-    'Rich &amp; Creamy':[-3,1],
-    'Light &amp; Crisp':[-3,-3]
+    'Fruity_&_Smooth':[-5,2],
+    'Rich_&_Creamy':[-3,1],
+    'Light_&_Crisp':[-3,-3]
   }
 
   // Varietal default coordinates from our wine taste mapping work
-
   var wineVariatalX = varietalTaste[varietal][0]
   var wineVariatalY = varietalTaste[varietal][1]
 
   // Wine.com's style preferences added to more accurately position wine within varietal's mapped range
-   if (wineStyle === 'Big &amp; Bold' || wineStyle === 'Earthy &amp; Spicy' || wineStyle === 'Light &amp; Fruity' || wineStyle === 'Smooth &amp; Supple'|| wineStyle === 'Rich &amp; Creamy' || wineStyle === 'Light &amp; Crisp' || wineStyle === 'Fruity &amp; Smooth') {
-      var wineStyleX = varietalStyle[wineStyle][0]
-      var wineStyleY = varietalStyle[wineStyle][1]
-   } else {
-      var wineStyleX = 0
-      var wineStyleY = 0
-   };
+  var wineStyleX = varietalStyle[wineStyle][0]
+  var wineStyleY = varietalStyle[wineStyle][1]
+
   // Creates wines specific taste profile coordinates
   var wineTC = [wineStyleX+wineVariatalX, wineStyleY+wineVariatalY]
+
+  // NEED TO ADD TO SAVE TO DB:
   return wineTC
   // callback()
 
@@ -234,6 +227,7 @@ var wineApiLookupSorting = function(results, wineName) {
 
   var similar = function(searchWord, resultObject){
     var highest = {score: 0}
+    results = []
     for (var name in resultObject){
       var lengthsearchWord = searchWord.length;
       var lengthResult = name.length - 5;
@@ -247,12 +241,15 @@ var wineApiLookupSorting = function(results, wineName) {
       }
       var weight = equivalency / maxLength;
       var alikeness = weight * 100
-      if (alikeness > highest.score){
-        highest.name = name
-        highest.score = alikeness
-      }
+
+
+
+      results.push({name: name, score: alikeness})
+
+
     }
-    console.log(highest);
-    return resultObject[highest.name]
+    var sorted = _.sortBy(results, 'score').reverse()
+    console.log(resultObject[sorted[0].name])
+    return resultObject[sorted[0].name]
     console.log('worked')
   }
