@@ -47,9 +47,7 @@ function showWineResults(results){
 }
 
 
-
 function wineTasteCoordinates(varietal, wineStyle, callback) {
-
    // Should be DB Collection or we can create static list since none of these numbers change
   var varietalTaste = {
   //Reds
@@ -80,27 +78,30 @@ function wineTasteCoordinates(varietal, wineStyle, callback) {
   var varietalStyle = {
   //Reds
     'Big &amp; Bold':[0,5],
-    'Earthy_&_Spicy':[5,3],
-    'Light_&_Fruity':[-3,-3],
-    'Smooth_&_Supple':[-4,2],
+    'Earthy &amp; Spicy':[5,3],
+    'Light &amp; Fruity':[-3,-3],
+    'Smooth &amp; Supple':[-4,2],
   //Whites
-    'Fruity_&_Smooth':[-5,2],
-    'Rich_&_Creamy':[-3,1],
-    'Light_&_Crisp':[-3,-3]
+    'Fruity &amp; Smooth':[-5,2],
+    'Rich &amp; Creamy':[-3,1],
+    'Light &amp; Crisp':[-3,-3]
   }
 
   // Varietal default coordinates from our wine taste mapping work
+
   var wineVariatalX = varietalTaste[varietal][0]
   var wineVariatalY = varietalTaste[varietal][1]
 
   // Wine.com's style preferences added to more accurately position wine within varietal's mapped range
-  var wineStyleX = varietalStyle[wineStyle][0]
-  var wineStyleY = varietalStyle[wineStyle][1]
-
+   if (wineStyle === 'Big &amp; Bold' || wineStyle === 'Earthy &amp; Spicy' || wineStyle === 'Light &amp; Fruity' || wineStyle === 'Smooth &amp; Supple'|| wineStyle === 'Rich &amp; Creamy' || wineStyle === 'Light &amp; Crisp' || wineStyle === 'Fruity &amp; Smooth') {
+      var wineStyleX = varietalStyle[wineStyle][0]
+      var wineStyleY = varietalStyle[wineStyle][1]
+   } else {
+      var wineStyleX = 0
+      var wineStyleY = 0
+   };
   // Creates wines specific taste profile coordinates
   var wineTC = [wineStyleX+wineVariatalX, wineStyleY+wineVariatalY]
-
-  // NEED TO ADD TO SAVE TO DB:
   return wineTC
   // callback()
 

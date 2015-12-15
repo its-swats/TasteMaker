@@ -7,6 +7,7 @@ Template.body.events ({
         $('#pageHome').addClass('hide');
         $('#pageDisplay').removeClass('hide')
         render = Blaze.render(Template.wineHistory, document.querySelector('#pageDisplay'))
+
     }
 })
 
@@ -18,6 +19,19 @@ Template.wineHistory.events ({
         Blaze.remove(render)
     }
 })
+
+Template.wineHistory.onCreated(function () {
+  // Use this.subscribe inside onCreated callback
+    console.log('two')
+    this.subscribe('userHistory')
+});
+
+Template.wineHistory.helpers({
+    history: function(){
+        return UserHistory.find({})
+    }
+})
+
 
 // if (Meteor.isClient){
 

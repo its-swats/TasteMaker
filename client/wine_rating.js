@@ -27,6 +27,15 @@ Template.wineQuestions.events ({
         questionOne = parseInt($('.range-slider input')[0].value)
         questionTwo = parseInt($('.range-slider input')[1].value)
         userEvaluation(wineCoords, convertedAnswer, questionOne, questionTwo)
+        Blaze.remove(render)
+        render = Blaze.renderWithData(Template.finalWineEval, {wineCoords: 0, tasteProfile: 0 }, document.querySelector('#pageDisplay'))
+    }
+})
+
+Template.finalWineEval.events ({
+    'click button': function(event) {
+        event.preventDefault();
+        //convertedAnswer is still here, stores the like/dislike/hate
         $('#pageHome').toggleClass('hide');
         $('#pageDisplay').toggleClass('hide')
         Blaze.remove(render)
@@ -74,3 +83,75 @@ function userEvaluation(wineTasteCoordinates, evaluationWine, evaluationX, evalu
        }
      }
 }
+
+Template.finalWineEval.rendered = function(){
+    makefinalEvalChart();
+};
+
+    function makefinalEvalChart(){
+     var contextr = document.getElementById("finalEvalChart").getContext("2d");
+
+      // var tastes = Taste.find({user:Meteor.userId})
+      var splitUpTheTasteArrays = []
+      // UserTasteProfile being created here: )does not currently work
+      Taste.find({user: Meteor.userId()}).forEach(function(taste){splitUpTheTasteArrays.push(taste.userTaste)})
+      // console.log(splitUpTheTasteArrays)
+
+      var bold = 0;
+      var fruity = 0;
+      var earthy = 0;
+      var light = 0;
+
+      for (i=0; i<splitUpTheTasteArrays.length;i++){
+        if (splitUpTheTasteArrays[i][0] > 0) {
+            earthy += splitUpTheTasteArrays[i][0];
+        }else if(splitUpTheTasteArrays[i][0] < 0){
+            fruity += -(splitUpTheTasteArrays[i][0]);
+        }
+        if (splitUpTheTasteArrays[i][1] > 0) {
+            bold += splitUpTheTasteArrays[i][1];
+        }else if(splitUpTheTasteArrays[i][1] < 0){
+            light += -(splitUpTheTasteArrays[i][1]);
+        }
+      }
+
+      var bold = bold/splitUpTheTasteArrays.length;
+      var fruity = fruity/splitUpTheTasteArrays.length;
+      var earthy = earthy/splitUpTheTasteArrays.length;
+      var light = light/splitUpTheTasteArrays.length;
+
+
+      var datar = {
+    labels: ["Bold", "Earthy", "Light", "Fruity"],
+    datasets: [
+        {
+            label: "This Wine",
+            fillColor: "rgba(151,187,205,0.2)",
+            strokeColor: "rgba(220,220,220,1)",
+            pointColor: "rgba(220,220,220,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(220,220,220,1)",
+            data: [20, 10, 15, -5]
+        },
+        {
+            label: "Your Taste Profile",
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "rgba(151,187,205,1)",
+            pointColor: "rgba(151,187,205,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(151,187,205,1)",
+            data: [20, 30, 40, 50]
+            // data: [bold, earthy, light, fruity]
+        }
+    ]
+};
+
+  var finalEvalChart = new Chart(contextr).Radar(datar);
+    }
+
+    // function findTaste(){
+    // }
+
+// }
