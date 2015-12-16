@@ -1,8 +1,8 @@
 
 var varietalsObject = {
 
-
-  //Reds
+var varietalTaste = {
+   //Reds
     'Cabernet Franc':[30,30],
     'Syrah/Shiraz':[50,18],
     'Pinot Noir':[-7,10],
@@ -18,6 +18,31 @@ var varietalsObject = {
     'Zinfandel':[35,-35],
     'Chianti':[15,40],
     'Tempranillo':[28,30],
+    'Syrah/Shiraz':[18,50],
+    'Pinot Noir':[10,-7],
+    'Cabernet Sauvignon':[5,40],
+    'Sangiovese':[35,28],
+    'Barbera':[-38,25],
+    'Grenache':[-41,12],
+    'Malbec':[-31,36],
+    'Merlot':[-16,45],
+    "Nero d'Avola":[-32,30],
+    'Petite Sirah':[3,15],
+    'Pinotage':[33,20],
+    'Zinfandel':[-35,35],
+    'Chianti':[40,15],
+    'Primitivo':[-35,35],
+    'Tempranillo':[30,28],
+    'Other Red Wine':[-4,36],
+    'Mourvedre':[10,10],
+    'Nebbiolo':[40,30],
+    'Carmenere':[10,1],
+    'Dolcetto':[-35,25],
+    'Gamay':[-36,-45],
+    'Rhône Blends':[-34,17],
+    'Other Red Blends':[-4,36],
+    'Bordeaux Blends':[-15,40],
+
   //Whites
     'Chardonnay':[-13,-9],
     'Sauvignon Blanc':[-27,37],
@@ -25,7 +50,24 @@ var varietalsObject = {
     'Muscat':[7,45],
     'Riesling':[-25,-20],
     'Viognier':[17,-10]
-  }
+    'Chardonnay':[-9,-13],
+    'Sauvignon Blanc':[37,-27],
+    'Pinot Gris/Grigio':[1, -31],
+    'Albarino':[-10, -31],
+    'Chenin Blanc':[-15, 10],
+    'Gewurztraminer':[-20, -25],
+    'Gruner Veltliner':[-20, -25],
+    'Muscat':[-45, 7],
+    'Other White Blends':[13, -18],
+    'Other White Wine':[13, -18],
+    'Pinot Blanc':[-20, -13],
+    'Riesling':[-20,-25],
+    'Semillon':[-30, 27],
+    'Torrontes':[-45, 7],
+    'Viognier':[-10, 17],
+    'Bordeaux White Blends':[42, -21],
+    'Rhône White Blends':[-18, 17]
+   }
 
 function getRecommendation(tasteProfile){
     // distance cant get bigger then 145 by construct...
@@ -86,6 +128,7 @@ Template.recWine.events ({
 //         return (splitUpTheTasteArrays)
 //     // })
 //     }
+
 Template.body.rendered = function() {
 var splitUpTheTasteArrays1 = []
     var tastes = Taste.find({})
@@ -126,3 +169,4 @@ var step1;
 
   getRecommendation([tastesX, tastesY]);
 }
+

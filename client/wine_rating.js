@@ -88,14 +88,22 @@ Template.finalWineEval.rendered = function(){
     makefinalEvalChart();
 };
 
+  // var splitUpTheTasteArrays1 = []
+
+  //    var tastes = Taste.find({})
+  //    tastes.forEach(function(chicken){splitUpTheTasteArrays1.push(chicken[2].userTaste)})
+  //    // .forEach(function(taste){splitUpTheTasteArrays1.push(taste.userTaste)})
+  //       console.log(splitUpTheTasteArrays1)
+  //       console.log(something);
+
+
     function makefinalEvalChart(){
      var contextr = document.getElementById("finalEvalChart").getContext("2d");
-
       // var tastes = Taste.find({user:Meteor.userId})
       var splitUpTheTasteArrays = []
-      // UserTasteProfile being created here: )does not currently work
-      Taste.find({user: Meteor.userId()}).forEach(function(taste){splitUpTheTasteArrays.push(taste.userTaste)})
+      Taste.find({}).forEach(function(taste){splitUpTheTasteArrays.push(taste.userTaste)})
       // console.log(splitUpTheTasteArrays)
+
 
       var bold = 0;
       var fruity = 0;
@@ -132,7 +140,7 @@ Template.finalWineEval.rendered = function(){
             pointStrokeColor: "#fff",
             pointHighlightFill: "#fff",
             pointHighlightStroke: "rgba(220,220,220,1)",
-            data: [20, 10, 15, -5]
+            data: [0, 0, 0, 0]
         },
         {
             label : 'TasteProfile',
@@ -142,8 +150,7 @@ Template.finalWineEval.rendered = function(){
             pointStrokeColor: "#fff",
             pointHighlightFill: "#fff",
             pointHighlightStroke: "rgba(151,187,205,1)",
-            data: [20, 30, 40, 50]
-            // data: [bold, earthy, light, fruity]
+            data: [bold, earthy, light, fruity]
         }
     ]
 };
