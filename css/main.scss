@@ -1,10 +1,12 @@
 @import '{zurb:foundation-sites}/scss/foundation';
 @include foundation-everything;
 @include foundation-slider;
+@import url(https://fonts.googleapis.com/css?family=Quattrocento:700);
 
 .button {
-    background-color: green;
+    background-color: #212121;
     width: 100%;
+    font-family: 'Quattrocento', serif;
 }
 
 .button-group.radius li {
@@ -14,4 +16,8 @@
 .button-group.radius a {
     width: 100%;
     font-size: 2.5em;
+}
+
+.button:hover {
+  background-color: #646464;
 }

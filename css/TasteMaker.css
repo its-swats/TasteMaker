@@ -119,19 +119,19 @@ ul .button {
 
 /*Atomic Colors*/
 .bg_cream {
-    background-color: #cfc39b;
+    background-color: #909090;
 }
 
 .bg_purple {
-    background-color: #580a31;
+    background-color: #212121;
 }
 
 .bg_white {
-    background-color: #dee1f0;
+    background-color: #FFFFFF;
 }
 
 .text_white {
-    color: #dee1f0;
+    color: #FFFFFF;
 }
 
 .radius {
@@ -144,7 +144,7 @@ ul .button {
 }
 
 .sidebarText {
-    color: #dee1f0;   
+    color: #FFFFFF;
     font-size: 1.5em;
 }
 

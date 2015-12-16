@@ -7,10 +7,14 @@
       <h1>History</h1>
       <canvas id="myRadarChart" width="350 " height="400"></canvas>
       <h1>Preferred Varietals</h1>
-      {{#each history}}
-        {{wine.varietal}}
-      {{/each}}
-      {{varietalPercentage}}
+      <ul>
+        {{#each varietalPercentage}}
+          <li>
+            {{varietal}}
+            {{percentage}}
+          </li>
+        {{/each}}
+      </ul>
     </div>
   </row>
   <row>

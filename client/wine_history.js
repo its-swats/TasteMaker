@@ -204,3 +204,4 @@ function histChart(){
 
   var histChart = new Chart(context).Doughnut(data);
 }
+
