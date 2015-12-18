@@ -3,10 +3,10 @@ Template.body.events ({
         event.preventDefault();
         $('#pageHome').addClass('hide');
         $('#pageDisplay').removeClass('hide')
-        searchTerm = Meteor.call('methodsController', function(err, res){
-          return res
+        Meteor.call('methodsController', function(err, res){
+
         })
-        console.log(searchTerm)
+
 
         render = Blaze.render(Template.recWine, document.querySelector('#renderHere'))
     }

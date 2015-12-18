@@ -3,12 +3,10 @@ Meteor.methods({
    Future = Npm.require('fibers/future');
         var newFuture = new Future();
         Meteor.call('spiltTastes', function(err ,res){
-          console.log('made it');
+          console.log(res);
           if(err){
-            console.log(err)
             newFuture.throw(err);
           }else{
-            console.log(res)
             Meteor.call('tasteAverage', res, function(err, res){
               if(err){
                 newFuture.throw(err);
@@ -89,6 +87,7 @@ Meteor.methods({
               closest = varietalCoordinate;
           }
       }
+      console.log(closest)
       return closest
     }
   })

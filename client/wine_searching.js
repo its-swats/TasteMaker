@@ -21,15 +21,19 @@ Meteor.startup(function() {
       if (Meteor.isCordova){
         cordova.plugins.barcodeScanner.scan(
           function (result) {
-            alert('hit')
-            Meteor.call('upcDecoder', result, function(error, results){
-              alert(results[0])
-              var sorted = wineApiLookupSorting(results[0], results[1])
-              alert(results[1])
-              console.log(sorted)
-              var stuff = [sorted, results[1]]
-              narrowDownSearch(stuff);
-            });
+            if (result.text.length > 0){
+              Meteor.call('upcDecoder', result, function(error, results){
+                var sorted = wineApiLookupSorting(results[0], results[1])
+                var stuff = [sorted, results[1]]
+                narrowDownSearch(stuff);
+              });
+            }else{
+              if (typeof render !== 'undefined') {
+                Blaze.remove(render);
+              }
+              $('#pageDisplay').addClass('hide');
+              $('#pageHome').removeClass('hide');
+            }
           },
           function (error) {
             alert("Scanning failed: " + error);

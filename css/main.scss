@@ -1,6 +1,24 @@
-@import '{zurb:foundation-sites}/scss/foundation';
-@include foundation-everything;
-@include foundation-slider;
+* {
+-webkit-touch-callout: none;
+-moz-touch-callout: none;
+-ms-touch-callout: none;
+touch-callout: none;
+}
+* {
+-webkit-user-select: none;
+-khtml-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+}
+
+input {
+-webkit-user-select: auto !important;
+-khtml-user-select: auto !important;
+-moz-user-select: auto !important;
+-ms-user-select: auto !important;
+user-select: auto !important;
+}
 
 .button {
     background-color: #be0000;

@@ -11,7 +11,7 @@ Meteor.methods({
       var SearchTerm = varietalIds[recommendation];
       this.unblock()
       recommendationResults = Meteor.http.call("GET", "https://services.wine.com/api/beta2/service.svc/json/catalog?filter=categories(" + SearchTerm + ")&type=Basket&apikey=f6569a177b45d11f2e5dc5fee4bf9e82")
-
+      console.log(recommendationResults)
       return recommendationResults
     }
 })

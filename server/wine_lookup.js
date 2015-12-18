@@ -16,7 +16,6 @@ Meteor.methods({
       if(error){
           myFuture.throw(error);
       }else{
-        console.log('hit')
         var wineName = res.data[0].brand + " " + res.data[0].product_name
         Meteor.call('wineApiLookup', wineName, function(err, res){
           if(err) {
