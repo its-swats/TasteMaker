@@ -35,7 +35,7 @@ Meteor.methods({
       var splitUpTheTasteArrays1 = []
       var tastes = Taste.find({})
       tastes.forEach(function(tastes){splitUpTheTasteArrays1.push(tastes.userTaste)})
-      // console.log(splitUpTheTasteArrays1);
+      console.log(splitUpTheTasteArrays1);
       return splitUpTheTasteArrays1
     },
 
@@ -64,6 +64,13 @@ Meteor.methods({
         myAvgY += tastesY[i];
       }
       tastesY = myAvgY / tastesY.length
+      console.log('_______________________________________________________')
+      console.log('Y');
+      console.log(tastesY);
+      console.log('X');
+      console.log(tastesX);
+      console.log('_______________________________________________________')
+
       return [tastesX, tastesY]
     },
 
