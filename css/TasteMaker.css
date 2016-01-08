@@ -509,3 +509,30 @@ text-align: center
 #faces {
     margin-top: -1em;
 }
+
+#login_items1 {
+   margin-top: 2vh;
+   height: 60px;
+}
+
+#login_items2 {
+   margin-top: 2vh;
+   height: 60px;
+}
+
+#register_items1 {
+   margin-top: 2vh;
+   height: 60px;
+}
+
+#register_items2 {
+   margin-top: 2vh;
+   height: 60px;
+}
+
+#facebook_img {
+   margin-top: 1vh;
+   height: 60px;
+   width: 1500px;
+   margin-bottom: 1vh;
+}

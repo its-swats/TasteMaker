@@ -62,7 +62,7 @@
             </ul>
           </div>
           <div class='bottom_row_text text_white'>
-            <p><span class='span_rec left'>Recommend</span> <span class='span_profile right'>Profile</span></p>
+            <p><span class='span_rec left'>Recommend</span> <span class='span_profile right'>TasteProfile</span></p>
             </div>
         </row>
         <row class=''>
@@ -118,19 +118,25 @@
         <div class='loggedOut'>
          <div class="header_logo col-lg-header bg_purple"></div>
             <row>
-              <div id='userBox' class='col-6 columns small-12 bg_cream'>
-              {{>facebook}}
+              <div id='userBox' class='col-9 columns small-12 bg_picture'>
+               <br>
+                {{>facebook}}
+               <br>
+
+
                 <div class='signUp'>
                   {{> signUp}}
-                      </div>
+                 </div>
                 <div class='logIn hide'>
                   {{> logIn}}
-                      </div>
-              </div>
+                 </div>
+                <p class='text-center'><a id='logIn'>Existing Users Log In</a></p>
+             </div>
 
+       <!-- not currently being used  -->
             </row>
             <row>
-              <div class='col-3 bg_cream columns small-12 center-text'>
+              <div class='col-3 bg_picture columns small-12 center-text'>
               <p class='text-center'><a id='signUp'>Not Registered? Sign up now!</a></p>
               <p class='text-center'><a id='logIn'>Existing Users Log In</a></p>
               </div>

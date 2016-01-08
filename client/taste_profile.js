@@ -127,16 +127,6 @@ function makeChart(){
     tooltipEvents: [],
 
     showTooltips: true,
-
-    // legendTemplate : '<ul>'
-    // +'<% for (var i=0; i<datasets.length; i++) { %>'
-    // +'<li>'
-    // +'<span style=\"background-color:<%=datasets[i].lineColor%>\"></span>'
-    // +'<% if (datasets[i].label) { %><%= datasets[i].label %><% } %>'
-    // +'</li>'
-    // +'<% } %>'
-    // +'</ul>'
-  // }
 }
 
 var histTastes = UserHistory.find({user: Meteor.userId()})
@@ -207,15 +197,6 @@ var datar = {
     showTooltips: true,
     pointLabelFontSize: 15,
     pointLabelFontColor: "#5d0234", pointLabelFontFamily: "'PT Serif'", angleLineColor: "rgb(93,2,52)"
-    // legendTemplate:'<ul>'
-    //               +'<% for (var i=0; i<datasets.length; i++) { %>'
-    //                 +'<li>'
-    //                 +'<span style=\"background-color:<%=datasets[i].lineColor%>\"></span>'
-    //                 +'<% if (datasets[i].label) { %><%= datasets[i].label %><% } %>'
-    //               +'</li>'
-    //             +'<% } %>'
-    //           +'</ul>'
-
   }
 
   var myNewChart = new Chart(context).PolarArea(data, pOptions);

@@ -101,6 +101,7 @@ Meteor.methods({
   })
 
 varietalsObject = {
+ //Reds
    'Cabernet Franc':[30,30],
    'Syrah/Shiraz':[50,18],
    'Pinot Noir':[-7,10],

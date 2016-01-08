@@ -30,10 +30,13 @@ Template.wineHistory.helpers({
     }
 })
 
-Template.wineHistory.onRendered(function(){
+Template.tasteProfile.onRendered(function(){
   histChart();
 });
 
+Template.wineHistory.onRendered(function(){
+  histChart();
+});
 
 function histChart(){
     var context = document.getElementById("histChart").getContext("2d");
