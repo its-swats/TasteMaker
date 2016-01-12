@@ -1,5 +1,5 @@
 #TasteMaker
-=====
+
 ###What is TasteMaker?
 TasteMaker is an iOS App written in Meteor designed to allow users to scan wines and answer questions about them in order to get create a personal wine taste profile. 
 
