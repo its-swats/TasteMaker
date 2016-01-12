@@ -23,13 +23,13 @@ Once a user has built up a taste profile, the app will make recommendations on w
 =====
 ###Screenshots
 ######Loading Screen
-![loading screen](/markdown_images/01_loading_screen.png)
+![Loading Screen](/markdown_images/01_loading_screen.png)
 
 ######Main Menu
-![loading screen](/markdown_images/02_main_menu.png)
+![Main Menu](/markdown_images/02_main_menu.png)
 
 ######Wine Preference Questions
-![loading screen](/markdown_images/03_wine_questions.png)
+![Wine Preference Questions](/markdown_images/03_wine_questions.png)
 
 ######Taste Profile
-![loading screen](/markdown_images/04_taste_profile.png)
+![Taste Profile](/markdown_images/04_taste_profile.png)
